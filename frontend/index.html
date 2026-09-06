@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShopKart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="brand-mark">◕</span>
+        <span class="brand-name">ShopKart</span>
+      </div>
+      <nav class="category-pills" id="categoryPills">
+        <button class="pill active" data-category="">All</button>
+      </nav>
+      <div class="nav-actions">
+        <button class="nav-btn" id="ordersBtn">Your Orders</button>
+        <button class="nav-btn" id="profileBtn">Profile</button>
+        <button class="cart-toggle" id="cartToggle">
+          Cart <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="layout">
+
+    <section class="catalog">
+      <div class="catalog-head">
+        <h1>Today's stall</h1>
+        <p class="catalog-sub">Fresh off the shelf — filter by category or search below. Tap a card for details.</p>
+        <input type="search" id="searchBox" class="search-box" placeholder="Search products…">
+      </div>
+
+      <div id="productGrid" class="product-grid">
+        <!-- product cards injected by app.js -->
+      </div>
+
+      <p id="loadingMsg" class="status-msg">Loading products…</p>
+      <p id="errorMsg" class="status-msg error-msg" hidden>
+        Couldn't reach the ShopKart API at <code id="apiUrlDisplay"></code>.
+        Make sure the Spring Boot backend is running (<code>mvn spring-boot:run</code>).
+      </p>
+    </section>
+
+    <aside class="sidebar" id="cartSidebar">
+      <div class="sidebar-section">
+        <h2>Your cart</h2>
+        <ul id="cartList" class="cart-list">
+          <li class="cart-empty">Cart's empty — add something from the stall.</li>
+        </ul>
+        <div class="cart-total-row">
+          <span>Total</span>
+          <span id="cartTotal" class="mono">₹0.00</span>
+        </div>
+        <button id="checkoutBtn" class="btn-checkout" disabled>Proceed to Buy</button>
+        <button id="undoBtn" class="btn-secondary" disabled>Undo last add</button>
+      </div>
+
+      <div class="sidebar-section">
+        <h2>Best-value finder</h2>
+        <p class="sidebar-hint">Give it a budget — it runs a 0/1 knapsack over the whole catalog to pick the best combination of items.</p>
+        <div class="budget-row">
+          <span class="rupee">₹</span>
+          <input type="number" id="budgetInput" placeholder="2000" min="0" step="50">
+          <button id="findBtn" class="btn-primary">Find</button>
+        </div>
+        <ul id="budgetResult" class="budget-result"></ul>
+      </div>
+    </aside>
+
+  </main>
+
+  <footer class="footer">
+    <span>ShopKart — a Java + DSA capstone project. Backend: Spring Boot REST API.</span>
+  </footer>
+
+  <!-- ===================== PRODUCT DETAIL MODAL ===================== -->
+  <div id="detailOverlay" class="overlay" hidden>
+    <div class="modal modal-wide">
+      <button type="button" class="modal-close" id="detailCloseBtn" aria-label="Close">✕</button>
+      <img id="detailImage" class="detail-image" src="" alt="">
+      <span id="detailCategory" class="product-category"></span>
+      <h2 id="detailName" class="detail-name"></h2>
+      <div class="detail-meta-row">
+        <span id="detailRating" class="detail-rating"></span>
+        <span id="detailStock" class="detail-stock"></span>
+      </div>
+      <span id="detailPrice" class="price-tag detail-price"></span>
+      <h3 class="detail-specs-title">Specifications</h3>
+      <ul id="detailSpecs" class="detail-specs"></ul>
+      <button type="button" class="btn-checkout" id="detailAddBtn">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- ===================== CART VIEW MODAL ===================== -->
+  <div id="cartViewOverlay" class="overlay" hidden>
+    <div class="modal">
+      <button type="button" class="modal-close" id="cartViewCloseBtn" aria-label="Close">✕</button>
+      <h2>Your cart</h2>
+      <ul id="cartViewList" class="cart-list"></ul>
+      <div class="cart-total-row">
+        <span>Total</span>
+        <span id="cartViewTotal" class="mono">₹0.00</span>
+      </div>
+      <button type="button" class="btn-primary btn-full" id="cartViewCheckoutBtn">Proceed to Buy</button>
+    </div>
+  </div>
+
+  <!-- ===================== YOUR ORDERS MODAL ===================== -->
+  <div id="ordersOverlay" class="overlay" hidden>
+    <div class="modal">
+      <button type="button" class="modal-close" id="ordersCloseBtn" aria-label="Close">✕</button>
+      <h2>Your orders</h2>
+      <div id="ordersList" class="orders-list"></div>
+    </div>
+  </div>
+
+  <!-- ===================== PROFILE MODAL ===================== -->
+  <div id="profileOverlay" class="overlay" hidden>
+    <div class="modal">
+      <button type="button" class="modal-close" id="profileCloseBtn" aria-label="Close">✕</button>
+      <div class="profile-avatar">LP</div>
+      <h2 class="profile-name">Lokesh Palariya</h2>
+      <div class="profile-details">
+        <div><strong>Roll No.</strong><span>RK3P24BTB45</span></div>
+        <div><strong>Group</strong><span>Group 2</span></div>
+        <div><strong>Course</strong><span>CSE443 — Seminar on Summer Training</span></div>
+        <div><strong>University</strong><span>Lovely Professional University</span></div>
+      </div>
+      <p class="sidebar-hint">This is a demo profile for a college project — no real account system is connected.</p>
+    </div>
+  </div>
+
+  <!-- ===================== TRACK ORDER MODAL (standalone, reusable) ===================== -->
+  <div id="trackOverlay" class="overlay" hidden>
+    <div class="modal">
+      <button type="button" class="modal-close" id="trackCloseBtn" aria-label="Close">✕</button>
+      <h2>Track your order</h2>
+      <p id="trackOrderIdLabel" class="mono"></p>
+      <ul class="tracking-timeline">
+        <li class="tracking-step done"><span class="tracking-dot"></span>Order Placed <span class="tracking-date" id="trackDatePlaced"></span></li>
+        <li class="tracking-step"><span class="tracking-dot"></span>Packed</li>
+        <li class="tracking-step"><span class="tracking-dot"></span>Shipped</li>
+        <li class="tracking-step"><span class="tracking-dot"></span>Out for Delivery</li>
+        <li class="tracking-step"><span class="tracking-dot"></span>Delivered <span class="tracking-date" id="trackDateExpected"></span></li>
+      </ul>
+      <button type="button" class="btn-secondary btn-full" id="trackCloseBtn2">Close</button>
+    </div>
+  </div>
+
+  <!-- ===================== CHECKOUT MODAL ===================== -->
+  <div id="checkoutOverlay" class="overlay" hidden>
+    <div class="modal">
+
+      <button type="button" class="modal-close" id="modalCloseBtn" aria-label="Close">✕</button>
+
+      <div class="modal-steps">
+        <span class="step-dot active" data-step="1">1</span>
+        <span class="step-line"></span>
+        <span class="step-dot" data-step="2">2</span>
+        <span class="step-line"></span>
+        <span class="step-dot" data-step="3">3</span>
+        <span class="step-line"></span>
+        <span class="step-dot" data-step="4">4</span>
+      </div>
+
+      <!-- Step 1: Review Cart -->
+      <div class="modal-step" id="step1" data-step-panel="1">
+        <h2>Review your cart</h2>
+        <ul id="checkoutCartList" class="cart-list"></ul>
+        <div class="cart-total-row">
+          <span>Total</span>
+          <span id="checkoutTotal" class="mono">₹0.00</span>
+        </div>
+        <button type="button" class="btn-primary btn-full" id="toStep2Btn">Continue to Address</button>
+      </div>
+
+      <!-- Step 2: Address -->
+      <div class="modal-step" id="step2" data-step-panel="2" hidden>
+        <h2>Shipping address</h2>
+        <form id="addressForm" class="checkout-form">
+          <label>Full Name
+            <input type="text" id="addrName" required placeholder="Lokesh Palariya">
+          </label>
+          <label>Phone Number
+            <input type="tel" id="addrPhone" required pattern="[0-9]{10}" placeholder="9876543210">
+          </label>
+          <label>Address
+            <input type="text" id="addrLine" required placeholder="House no, street, area">
+          </label>
+          <div class="form-row">
+            <label>City
+              <input type="text" id="addrCity" required placeholder="Phagwara">
+            </label>
+            <label>Pincode
+              <input type="text" id="addrPincode" required pattern="[0-9]{6}" placeholder="144411">
+            </label>
+          </div>
+          <div class="form-buttons">
+            <button type="button" class="btn-secondary" id="backTo1Btn">Back</button>
+            <button type="submit" class="btn-primary">Continue to Payment</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Step 3: Payment -->
+      <div class="modal-step" id="step3" data-step-panel="3" hidden>
+        <h2>Payment method</h2>
+        <p class="sidebar-hint">This is a demo checkout for a college project — no real payment is processed.</p>
+        <div class="payment-options">
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="COD" checked>
+            <span>Cash on Delivery <span class="cod-fee-tag">+₹10 fee</span></span>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="CARD">
+            <span>Credit / Debit Card</span>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="UPI">
+            <span>UPI</span>
+          </label>
+        </div>
+
+        <div id="cardFields" class="checkout-form" hidden>
+          <label>Card Number
+            <input type="text" id="cardNumber" placeholder="4111 1111 1111 1111" maxlength="19">
+          </label>
+          <div class="form-row">
+            <label>Expiry
+              <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5">
+            </label>
+            <label>CVV
+              <input type="text" id="cardCvv" placeholder="123" maxlength="3">
+            </label>
+          </div>
+        </div>
+
+        <div id="upiFields" class="upi-apps" hidden>
+          <p class="sidebar-hint">Tap an app to pay (you'll be asked to confirm):</p>
+          <button type="button" class="upi-app-btn" data-app="Google Pay" style="--app-color:#4285F4">
+            <span class="upi-app-icon">G</span> Google Pay
+          </button>
+          <button type="button" class="upi-app-btn" data-app="PhonePe" style="--app-color:#5F259F">
+            <span class="upi-app-icon">P</span> PhonePe
+          </button>
+          <button type="button" class="upi-app-btn" data-app="Paytm" style="--app-color:#00BAF2">
+            <span class="upi-app-icon">₹</span> Paytm
+          </button>
+        </div>
+
+        <div class="form-buttons" id="step3Buttons">
+          <button type="button" class="btn-secondary" id="backTo2Btn">Back</button>
+          <button type="button" class="btn-primary" id="toStep4Btn">Review Order</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Final confirmation before placing -->
+      <div class="modal-step" id="step4" data-step-panel="4" hidden>
+        <h2>Confirm your order</h2>
+        <div class="order-summary" id="orderSummary"></div>
+        <div class="form-buttons">
+          <button type="button" class="btn-secondary" id="backTo3Btn">Back</button>
+          <button type="button" class="btn-primary" id="placeOrderBtn">Place Order</button>
+        </div>
+      </div>
+
+      <!-- Step 5: Confirmation -->
+      <div class="modal-step" id="stepDone" data-step-panel="done" hidden>
+        <div class="confirm-icon">✓</div>
+        <h2>Order placed!</h2>
+        <p id="confirmOrderId" class="mono"></p>
+        <p id="confirmDelivery" class="delivery-estimate"></p>
+        <p class="sidebar-hint">Thank you for shopping at ShopKart. This order was processed using your OrderQueue and OrderHistory data structures on the backend.</p>
+        <button type="button" class="btn-primary btn-full" id="trackOrderBtn">Track Your Order</button>
+        <button type="button" class="btn-secondary btn-full" id="continueShoppingBtn">Continue Shopping</button>
+      </div>
+
+    </div>
+  </div>
+  <!-- =================== END CHECKOUT MODAL =================== -->
+
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

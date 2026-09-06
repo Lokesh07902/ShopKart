@@ -1,0 +1,32 @@
+id,name,price,category,stock,rating,imageUrl
+P001,Wireless Mouse,499.00,Electronics,50,4.2,https://loremflickr.com/300/200/mouse,computer
+P002,Mechanical Keyboard,2499.00,Electronics,30,4.6,https://loremflickr.com/300/200/keyboard,computer
+P003,USB-C Cable,199.00,Electronics,100,3.8,https://loremflickr.com/300/200/usb,cable
+P004,Laptop Stand,899.00,Accessories,40,4.1,https://loremflickr.com/300/200/laptop,desk
+P005,Bluetooth Earbuds,1599.00,Electronics,25,4.4,https://loremflickr.com/300/200/earbuds,headphones
+P006,Notebook Set,149.00,Stationery,200,3.9,https://loremflickr.com/300/200/notebook,stationery
+P007,Desk Lamp,749.00,Home,60,4.0,https://loremflickr.com/300/200/lamp,desk
+P008,Webcam 1080p,1299.00,Electronics,35,4.3,https://loremflickr.com/300/200/webcam,camera
+P009,Phone Case,299.00,Accessories,150,3.7,https://loremflickr.com/300/200/phonecase,smartphone
+P010,Portable SSD 512GB,3499.00,Electronics,20,4.7,https://loremflickr.com/300/200/harddrive,storage
+P011,Ergonomic Chair Cushion,999.00,Home,45,4.0,https://loremflickr.com/300/200/cushion,chair
+P012,Screen Protector,99.00,Accessories,300,3.5,https://loremflickr.com/300/200/smartphone,glass
+P013,Gaming Headset,2199.00,Electronics,28,4.5,https://loremflickr.com/300/200/headset,gaming
+P014,Water Bottle,349.00,Home,90,4.1,https://loremflickr.com/300/200/waterbottle
+P015,Backpack,1899.00,Accessories,55,4.3,https://loremflickr.com/300/200/backpack
+P016,Basmati Rice 5kg,499.00,Grocery,80,4.4,https://loremflickr.com/300/200/rice,grocery
+P017,Sunflower Cooking Oil 1L,189.00,Grocery,120,4.2,https://loremflickr.com/300/200/cookingoil,bottle
+P018,Wheat Atta 5kg,269.00,Grocery,100,4.3,https://loremflickr.com/300/200/flour,wheat
+P019,Assam Tea 250g,159.00,Grocery,140,4.5,https://loremflickr.com/300/200/tea,leaves
+P020,Budget Smartphone,8999.00,Mobile,25,4.0,https://loremflickr.com/300/200/smartphone
+P021,Flagship Smartphone,54999.00,Mobile,10,4.6,https://loremflickr.com/300/200/smartphone,premium
+P022,Fast Charger 33W,699.00,Mobile,60,4.3,https://loremflickr.com/300/200/charger,electronics
+P023,Wired Earphones,299.00,Mobile,90,3.9,https://loremflickr.com/300/200/earphones
+P024,Herbal Face Wash,199.00,Beauty,110,4.1,https://loremflickr.com/300/200/facewash,skincare
+P025,Matte Lipstick,349.00,Beauty,70,4.2,https://loremflickr.com/300/200/lipstick,makeup
+P026,Perfume 100ml,899.00,Beauty,40,4.4,https://loremflickr.com/300/200/perfume,bottle
+P027,Anti-Dandruff Shampoo,249.00,Beauty,95,4.0,https://loremflickr.com/300/200/shampoo,bottle
+P028,Cotton T-Shirt,499.00,Fashion,130,4.1,https://loremflickr.com/300/200/tshirt,clothing
+P029,Slim Fit Jeans,1299.00,Fashion,75,4.3,https://loremflickr.com/300/200/jeans,denim
+P030,Running Sneakers,1999.00,Fashion,50,4.5,https://loremflickr.com/300/200/sneakers,shoes
+P031,Women's Handbag,1599.00,Fashion,35,4.2,https://loremflickr.com/300/200/handbag,fashion
