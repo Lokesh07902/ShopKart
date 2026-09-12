@@ -5,34 +5,21 @@ import com.shopkart.model.Product;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * SESSION 9 — List & Set Interfaces
- * SESSION 10 — Map Interface & Hashing
- * SESSION 11 — Two-Pointer Technique & Sliding Window
- *
- * Wraps Repository<Product> and adds product-specific queries. This is where
- * the HashMap vs linear-search tradeoff from Session 3 gets paid off, and
- * where the HashSet of categories (Session 9) lives.
- */
+
 public class ProductRepository extends Repository<Product> {
 
     public ProductRepository() {
         super(Product::getId);
     }
 
-    /** SESSION 9 — HashSet gives us automatic de-duplication of categories. */
+    
     public Set<String> getAllCategories() {
         Set<String> categories = new HashSet<>();
         for (Product p : getAll()) categories.add(p.getCategory());
         return categories;
     }
 
-    /**
-     * SESSION 11 — Two-Pointer Technique.
-     * Given a SORTED (by price) list, find two products whose combined price
-     * equals the target exactly. Classic "Two Sum on a sorted array" pattern:
-     * O(n) instead of the O(n^2) brute force of checking every pair.
-     */
+    
     public Optional<Product[]> findPairWithExactTotal(List<Product> sortedByPrice, double target) {
         int left = 0, right = sortedByPrice.size() - 1;
         while (left < right) {

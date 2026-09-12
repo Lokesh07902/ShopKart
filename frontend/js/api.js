@@ -2,7 +2,7 @@
 // Thin wrapper around fetch() for every ShopKart backend endpoint.
 // Change API_BASE_URL if your Spring Boot app runs on a different port.
 
-const API_BASE_URL = "http://localhost:8080/api";
+const API_BASE_URL =  "https://shopkart-production-c21b.up.railway.app/api";
 
 const ShopKartAPI = {
   async getProducts(category) {

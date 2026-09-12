@@ -15,18 +15,13 @@ import com.shopkart.util.CatalogLoader;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Console demo — runs EVERY module end to end so you can `java Main` and see
- * (and explain in viva) every data structure working on real data, without
- * needing Maven, Spring Boot, or a database. Read top to bottom; it follows
- * the session order from the course planner.
- */
+
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
         System.out.println("=========== ShopKart Console Demo ===========\n");
 
-        // ---------- SESSION 7 / 8-11: Load catalog, repository, hashing ----------
+        
         List<Product> catalog = CatalogLoader.loadFromCsv("data/products.csv");
         ProductRepository productRepo = new ProductRepository();
         catalog.forEach(productRepo::add);
@@ -39,19 +34,19 @@ public class Main {
         System.out.println("Linear search found: " + foundLinear);
         System.out.println("HashMap lookup found: " + foundHash + " (same result, O(1) instead of O(n))");
 
-        // ---------- SESSION 5: Polymorphism ----------
+        // ----------  Polymorphism ----------
         System.out.println("\n--- Session 5: Customer polymorphism ---");
         Customer regular = new RegularCustomer("C001", "Rohit", "rohit@example.com");
         Customer premium = new PremiumCustomer("C002", "Anjali", "anjali@example.com");
         System.out.printf("Regular customer discount on ₹1000: ₹%.2f%n", regular.applyDiscount(1000));
         System.out.printf("Premium customer discount on ₹1000: ₹%.2f%n", premium.applyDiscount(1000));
 
-        // ---------- SESSION 6: Interfaces / abstract classes ----------
+        // ----------  Interfaces / abstract classes ----------
         System.out.println("\n--- Session 6: Payment abstraction ---");
         PaymentMethod payment = new CardPayment("4242");
         payment.pay(1599.00);
 
-        // ---------- SESSION 7: Custom exceptions ----------
+        // ----------  Custom exceptions ----------
         System.out.println("\n--- Session 7: Custom exception handling ---");
         try {
             Product ssd = productRepo.findById("P010").orElseThrow();
@@ -62,7 +57,7 @@ public class Main {
             System.out.println("Caught expected exception: " + e.getMessage());
         }
 
-        // ---------- SESSION 11: Two-pointer & sliding window ----------
+        // ----------  Two-pointer & sliding window ----------
         System.out.println("\n--- Session 11: Two-pointer & sliding window ---");
         List<Product> sortedByPrice = new ArrayList<>(catalog);
         sortedByPrice.sort((a, b) -> Double.compare(a.getPrice(), b.getPrice()));
@@ -72,7 +67,7 @@ public class Main {
                         () -> System.out.println("No exact pair found for ₹1798"));
         System.out.println("Cheapest bundle of 3: " + productRepo.cheapestBundle(sortedByPrice, 3));
 
-        // ---------- SESSION 12/13: Linked lists ----------
+        // ----------  Linked lists ----------
         System.out.println("\n--- Session 12: Doubly linked list (order history) ---");
         OrderHistory history = new OrderHistory();
         Order o1 = new Order("ORD1", regular, false);
@@ -87,7 +82,7 @@ public class Main {
         catalog.subList(0, 3).forEach(carousel::addProduct);
         for (int i = 0; i < 5; i++) System.out.println("Carousel slot " + i + ": " + carousel.next().getName());
 
-        // ---------- SESSION 14/15: Stack & Queue ----------
+        // ----------  Stack & Queue ----------
         System.out.println("\n--- Session 14: Stack (cart undo) ---");
         CartActionStack cartStack = new CartActionStack();
         cartStack.push(CartActionStack.ActionType.ADD, catalog.get(0));

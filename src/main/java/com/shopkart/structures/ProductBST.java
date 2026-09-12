@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * SESSION 17 — Binary Search Trees & AVL Trees
+ *  Binary Search Trees & AVL Trees
  * A SECOND way to store products, keyed by price instead of id (that's the
  * HashMap's job — see ProductRepository). A BST is worth the extra structure
  * because it answers a query the HashMap can't do efficiently: "all products

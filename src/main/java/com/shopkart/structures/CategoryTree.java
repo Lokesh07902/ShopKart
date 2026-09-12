@@ -4,16 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * SESSION 16 — Binary Trees: Representation & Traversals
+ *  Binary Trees: Representation & Traversals
  * Models a (simplified, binary) category hierarchy, e.g.
  *          Electronics
  *          /         \
  *      Phones      Laptops
  *        /
  *  Accessories
- * A general catalog would be an n-ary tree, but the module scope is binary
- * trees, so each node has at most left/right — enough to demonstrate
- * Inorder / Preorder / Postorder traversal correctly.
+ 
  */
 public class CategoryTree {
 

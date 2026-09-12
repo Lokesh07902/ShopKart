@@ -3,9 +3,8 @@ package com.shopkart.structures;
 import com.shopkart.model.Order;
 
 /**
- * SESSION 12 — Singly & Doubly Linked Lists
- * Hand-built (not java.util.LinkedList) so the pointer manipulation is
- * explicit. A doubly linked list is the right structure here because we need
+ * Singly & Doubly Linked Lists
+ *  A doubly linked list is the right structure here because we need
  * to walk order history BOTH forward (oldest -> newest) and backward
  * (newest -> oldest, "show my last order") in O(1) per step, and
  * insertion at the tail must be O(1) — an ArrayList would need to shift
